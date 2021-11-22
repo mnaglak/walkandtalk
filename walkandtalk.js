@@ -3,7 +3,7 @@
 			center: [32.776324068465605, -79.9327707746953], //set center
 			zoom: 16 , //set initial zoom
 			maxZoom : 18,  //set max zoom
-			minZoom : 12,
+			minZoom : 1,
 			maxBounds: [ [-90, -180] , [90,180] ],
 			tap: false
 			}
@@ -38,21 +38,18 @@ var hatIcon = L.icon({
 			var hatman = L.marker([32.776324068465605, -79.9327707746953], {icon: hatIcon}).addTo(map);
 			hatman.bindPopup('<b><i>All tours start at the hatman!</i></b>' + '<img src="./images/hatman.jpg" width="200px" />');
 
-			$.get('./HighlightedLocations.csv', function(csvString) {
 
-			    // Use PapaParse to convert string to array of objects
-			    var data = Papa.parse(csvString, {header: true, dynamicTyping: true}).data;
+			var places = L.geoJson(locations, {
+				onEachFeature: popUp
+			}
+		).addTo(map);
 
-			    // For each row in data, create a marker and add it to the map
-			    // For each row, columns `Latitude`, `Longitude`, and `Title` are required
-			    for (var i in data) {
-			      var row = data[i];
+			function popUp(f,l) {
+				var out = [];
 
-			      var marker = L.marker([row.Latitude, row.Longitude], {
-			        opacity: 1
-			      }).bindPopup(row.Title);
-
-			      marker.addTo(map);
-			    }
-
-			  });
+				//adds spaces in between entries
+				if (f.properties) {
+					out.push('Location: ' + f.properties.Location +'<br>');
+					l.bindPopup(out.join("<br />"));
+				}
+			};
