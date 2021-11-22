@@ -23,23 +23,18 @@
 			console.log("You clicked the map at latitude: " + lat + " and longitude: " + lng);
 			});
 
-			var baseLayers = {
-				"Street Map" : Esri_WorldTopoMap,
-				};
 
-			L.control.layers(baseLayers).addTo(map);
+
 var hatIcon = L.icon({
 	iconUrl: './images/hat.png',
 	iconSize:     [40, 47], // size of the icon
-	iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
-  popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
 var highlightedLocationsIcon = L.icon({
 	iconUrl: './images/star.png'
 });
 
-			var hatman = L.marker([32.776324068465605, -79.9327707746953], {icon: hatIcon}).addTo(map);
+			var hatman = L.marker([32.7764052547477, -79.93261162173805], {icon: hatIcon}).addTo(map);
 			hatman.bindPopup('<b><i>All tours start at the hatman!</i></b>' + '<img src="./images/hatman.jpg" width="200px" />');
 
 function createCustomIcon (feature, latlng) {
@@ -71,3 +66,36 @@ function createCustomIcon (feature, latlng) {
 					l.bindPopup(out.join("<br />"));
 				}
 			};
+
+			var exampleTour = [{
+			    "type": "LineString",
+					"properties": {"tour": "Tyler's Tour 1", "time": "2 hours", "popupContent" : "Tyler's Tour 1"},
+			    "coordinates": [[-79.9327707746953, 32.776324068465605], [-79.9270469663246,32.776874329593966], [-79.92720795019963,32.7751243069951]]
+			}];
+
+			function onEachFeature(feature, layer) {
+			    // does this feature have a property named popupContent?
+			    if (feature.properties && feature.properties.popupContent) {
+			        layer.bindPopup(feature.properties.popupContent);
+			    }
+			}
+			var myStyle = {
+			    "color": "#ff7800",
+			    "weight": 5,
+			    "opacity": 0.65
+			};
+	var tours =	L.geoJSON(exampleTour, {
+		onEachFeature: onEachFeature,
+		style: myStyle
+	}
+  ).addTo(map);
+
+
+
+	var baseLayers = {
+		"Street Map" : Esri_WorldTopoMap,
+		};
+	var overlays = {
+		"Highlighted Locations" : places
+	};
+	L.control.layers(baseLayers, overlays).addTo(map);
