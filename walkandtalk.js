@@ -104,7 +104,7 @@ function createCustomIcon (feature, latlng) {
 	L.control.layers(baseLayers, overlays).addTo(map);
 
 	const legend = L.control.Legend({
-					position: "bottomleft",
+					position: "topright",
 					collapsed: false,
 					symbolWidth: 24,
 					opacity: 1,
