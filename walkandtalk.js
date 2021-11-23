@@ -73,6 +73,8 @@ function createCustomIcon (feature, latlng) {
 			    "coordinates": [[-79.9327707746953, 32.776324068465605], [-79.9270469663246,32.776874329593966], [-79.92720795019963,32.7751243069951]]
 			}];
 
+			var tours = L.layerGroup([exampleTour]);
+
 			function onEachFeature(feature, layer) {
 			    // does this feature have a property named popupContent?
 			    if (feature.properties && feature.properties.popupContent) {
@@ -97,6 +99,24 @@ function createCustomIcon (feature, latlng) {
 		};
 	var overlays = {
 		"Highlighted Locations" : places,
-		"Tours" : exampleTour
+		"Tour Options": tours
 	};
 	L.control.layers(baseLayers, overlays).addTo(map);
+
+	const legend = L.control.Legend({
+					position: "bottomleft",
+					collapsed: false,
+					symbolWidth: 24,
+					opacity: 1,
+					column: 2,
+					legends: [{
+							label: "Example Tour 1",
+							type: "polyline",
+							color: '#FFA500',
+					}, {
+							label: "Example Tour 2",
+							type: "polyline",
+							color: '#3388ff'
+					}]
+			})
+			.addTo(map);
