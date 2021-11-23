@@ -26,12 +26,12 @@
 
 
 var hatIcon = L.icon({
-	iconUrl: './images/hat.png',
+	iconUrl: './images/WalkandTalkCharlestonHero.png',
 	iconSize:     [40, 47], // size of the icon
 });
 
 var highlightedLocationsIcon = L.icon({
-	iconUrl: './images/WalkandTalkCharlestonHero.png'
+	iconUrl: './images/star.png'
 });
 
 			var hatman = L.marker([32.7764052547477, -79.93261162173805], {icon: hatIcon}).addTo(map);
