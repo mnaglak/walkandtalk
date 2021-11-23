@@ -27,7 +27,7 @@
 
 var hatIcon = L.icon({
 	iconUrl: './images/WalkandTalkCharlestonHero.png',
-	iconSize:     [40, 47], // size of the icon
+	iconSize:     [50, 50], // size of the icon
 });
 
 var highlightedLocationsIcon = L.icon({
@@ -35,7 +35,7 @@ var highlightedLocationsIcon = L.icon({
 });
 
 			var hatman = L.marker([32.7764052547477, -79.93261162173805], {icon: hatIcon}).addTo(map);
-			hatman.bindPopup('<b><i>All tours start at the hatman!</i></b>' + '<img src="./images/hatman.jpg" width="200px" />');
+			hatman.bindPopup('<b><i>All tours start at the hatman, located at the corner of King and Broad!</i></b>' + '<img src="./images/hatman.jpg" width="200px" />');
 
 function createCustomIcon (feature, latlng) {
 			  let myIcon = L.icon({
