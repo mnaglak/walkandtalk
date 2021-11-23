@@ -96,6 +96,7 @@ function createCustomIcon (feature, latlng) {
 		"Street Map" : Esri_WorldTopoMap,
 		};
 	var overlays = {
-		"Highlighted Locations" : places
+		"Highlighted Locations" : places,
+		"Tours" : exampleTour
 	};
 	L.control.layers(baseLayers, overlays).addTo(map);
